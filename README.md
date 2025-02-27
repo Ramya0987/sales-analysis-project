@@ -12,11 +12,11 @@ It covers **exploratory data analysis (EDA), SQL queries, business insights, and
 ## 📂 Project Structure
 ```
 Retail_Sales_Analysis/
-│── data/                   # (Optional: Dataset storage)
+│── retail_sales_data.csv    # (Optional: Dataset storage)
 │── sales_analysis_sql.py    # SQL + Python script
 │── sales_analysis.ipynb     # Jupyter Notebook with EDA & Visualizations
 │── README.md                # Project documentation
-│── images/                  # (Optional: Saved charts/graphs)
+
 ```
 
 ## ⚙️ Tools & Technologies
