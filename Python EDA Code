@@ -1,0 +1,6 @@
+Python EDA Code
+Python script that does the following: 
+✔ Loads the dataset
+✔ Checks for missing values & duplicates
+✔ Displays basic statistics
+✔ Provides initial data visualizations
