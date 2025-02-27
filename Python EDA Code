@@ -1,6 +1,57 @@
-Python EDA Code
+'''Python EDA Code
 Python script that does the following: 
 ✔ Loads the dataset
 ✔ Checks for missing values & duplicates
 ✔ Displays basic statistics
-✔ Provides initial data visualizations
+✔ Provides initial data visualizations'''
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the dataset
+df = pd.read_csv('retail_sales_data.csv')
+
+# Display basic info
+print("Dataset Info:")
+print(df.info())
+
+# Check for missing values
+print("\nMissing Values:")
+print(df.isnull().sum())
+
+# Check for duplicates
+duplicates = df.duplicated().sum()
+print(f"\nTotal Duplicate Rows: {duplicates}")
+if duplicates > 0:
+    df = df.drop_duplicates()
+    print("Duplicates removed.")
+
+# Display basic statistics
+print("\nStatistical Summary:")
+print(df.describe())
+
+# Convert date column to datetime format if applicable
+if 'date' in df.columns:
+    df['date'] = pd.to_datetime(df['date'])
+
+# Plot sales trend over time if date and sales columns exist
+if 'date' in df.columns and 'sales_amount' in df.columns:
+    plt.figure(figsize=(12, 6))
+    df.groupby(df['date'].dt.to_period("M")).sum()['sales_amount'].plot(kind='line', marker='o')
+    plt.title('Monthly Sales Trend')
+    plt.xlabel('Month')
+    plt.ylabel('Total Sales')
+    plt.grid(True)
+    plt.show()
+
+# Check correlation between numerical columns
+plt.figure(figsize=(10, 6))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm', fmt='.2f')
+plt.title('Feature Correlation Heatmap')
+plt.show()
+
+# Save cleaned dataset
+df.to_csv('data/cleaned_sales_data.csv', index=False)
+print("\nCleaned dataset saved as 'cleaned_sales_data.csv'")
+
